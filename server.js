@@ -20,7 +20,7 @@ router.get("/",(req,res)=>{
     res.render("index")
 })
 router.get("/hello",(req,res)=>{
-    res.render("about")
+    res.render("about",{title:"About page",ms:"The messege came from server.js"})
 })
 app.use("/",router)
 app.listen(PORT,()=>{
