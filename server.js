@@ -16,12 +16,13 @@ app.get('/hello',(req,res)=>{
 */
 app.set("view engine","pug")
 app.set("views",path.join(__dirname,"views"))
-router.get('/',(req,res)=>{
+router.get("/",(req,res)=>{
     res.render("index")
 })
 router.get("/hello",(req,res)=>{
     res.render("about")
 })
+app.use("/",router)
 app.listen(PORT,()=>{
     console.log(`App running at port ${PORT}`)
 })
