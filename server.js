@@ -20,9 +20,15 @@ router.get("/",(req,res)=>{
     res.render("index")
 })
 router.get("/hello",(req,res)=>{
-    res.render("about",{title:"About page",ms:"The messege came from server.js"})
+    res.render("about",{title:"About page",ms:varr})
 })
 app.use("/",router)
 app.listen(PORT,()=>{
     console.log(`App running at port ${PORT}`)
 })
+
+var varr = 0
+const timeerr = setInterval(()=>{
+    console.log('Counting',varr)
+    varr++
+},1000)
