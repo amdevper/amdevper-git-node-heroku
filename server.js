@@ -1,34 +1,26 @@
+//const PORT = process.env.PORT || 8080
 const express = require('express')
 const app = express()
-const path = require("path")
-const router = express.Router()
-const PORT = process.env.PORT || 8080
+const path = require('path')
 
-/* 
-app.get('/',(req,res)=>{
-    res.json({result:"OK",data:[1,2,3,4,5]})
-})
-*/
-/* 
-app.get('/hello',(req,res)=>{
-    res.json({result:"OKNG",data:[2,11,322,433,52]})
-})
-*/
-app.set("view engine","pug")
-app.set("views",path.join(__dirname,"views"))
-router.get("/",(req,res)=>{
-    res.render("index")
-})
-router.get("/hello",(req,res)=>{
-    res.render("about",{title:"About page",ms:varr})
-})
-app.use("/",router)
-app.listen(PORT,()=>{
-    console.log(`App running at port ${PORT}`)
+const APP_PORT = process.env.APP_PORT ||8080
+
+const server = app.listen(APP_PORT, () => {
+  console.log(`App running on port ${APP_PORT}`)
 })
 
-var varr = 0
-const timeerr = setInterval(()=>{
-    console.log('Counting',varr)
-    varr++
-},1000)
+const {Server} = require('socket.io')
+io = new Server(server)
+
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'pug')
+
+app.use(express.static('public'))
+
+app.get('/', (req, res) => {
+  res.render('index')
+})
+
+io.on('connection', (socket) => {
+  console.log('a user connected')
+})
